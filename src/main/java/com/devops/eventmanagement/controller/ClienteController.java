@@ -28,6 +28,13 @@ public class ClienteController {
         return "/views/clientes/listar";
     }
 
+    @GetMapping("/create")
+    public String crear(){
+
+        return "/views/clientes/frmCrear";
+
+    }
+
 
 
 }

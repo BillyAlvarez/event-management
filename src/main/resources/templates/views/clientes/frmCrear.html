@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head th:replace="plantilla/template :: head">
+
+</head>
+<body>
+<header th:replace="plantilla/template :: header"></header>
+<div class="container">
+    <div class="card bg-light">
+        <div class="card-header bg-dark text-light"></div>
+        <div class="card-body">
+            <form>
+                <div class="for-group row">
+                    <label for="nombres" class="col-md-2">Nombres</label>
+                    <input type="text" class="form-control-sm col-md-6" id="nombres" placeholder="Nombres del Cliente">
+                    <small></small>
+                </div>
+
+                <div class="for-group row">
+                    <label for="apellidos" class="col-md-2">Apellidos</label>
+                    <input type="text" class="form-control-sm col-md-6" id="apellidos"
+                           placeholder="Apellidos del Cliente">
+                    <small></small>
+                </div>
+
+                <div class="for-group row">
+                    <label for="telefono" class="col-md-2">Telefono</label>
+                    <input type="text" class="form-control-sm col-md-6" id="telefono"
+                           placeholder="Telefono del Cliente">
+                    <small></small>
+                </div>
+
+                <div class="for-group row">
+                    <label for="email" class="col-md-2">Email</label>
+                    <input type="email" class="form-control-sm col-md-6" id="email" placeholder="Email del Cliente">
+                    <small></small>
+                </div>
+
+                <div class="for-group row">
+                    <label for="ciudad" class="col-md-2">Ciudad</label>
+                    <select class="form-control-sm col-md-6" id="ciudad">
+                        <option>Santiago</option>
+                        <option>Nueva York</option>
+                    </select>
+                </div>
+
+<div class="card-footer bg-dark">
+                <input type="submit" class="btn btn-primary btn-sm" value="Guardar">
+</div>
+            </form>
+        </div>
+    </div>
+</div>
+<footer th:replace="plantilla/template :: footer"></footer>
+</body>
+</html>
