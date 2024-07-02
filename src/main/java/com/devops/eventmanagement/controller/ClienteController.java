@@ -1,6 +1,8 @@
 package com.devops.eventmanagement.controller;
 
+import com.devops.eventmanagement.models.entity.Ciudad;
 import com.devops.eventmanagement.models.entity.Cliente;
+import com.devops.eventmanagement.models.service.ICiudadService;
 import com.devops.eventmanagement.models.service.IClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,9 +19,12 @@ public class ClienteController {
     @Autowired
     private IClienteService clienteService;
 
+    @Autowired
+    private ICiudadService ciudadService;
+
 
     @GetMapping("/")
-    public String listarClientes(Model model){
+    public String listarClientes(Model model) {
         List<Cliente> listadoClientes = clienteService.listarTodos();
 
         model.addAttribute("titulo", "Listado Clientes");
@@ -29,12 +34,17 @@ public class ClienteController {
     }
 
     @GetMapping("/create")
-    public String crear(){
+    public String crear(Model model) {
+
+        Cliente cliente = new Cliente();
+        List<Ciudad> listCiudades = ciudadService.listaCiudades();
+        model.addAttribute("titulo", "Formulario Cliente");
+        model.addAttribute("cliente", cliente);
+        model.addAttribute("ciudades", listCiudades);
 
         return "/views/clientes/frmCrear";
 
     }
-
 
 
 }

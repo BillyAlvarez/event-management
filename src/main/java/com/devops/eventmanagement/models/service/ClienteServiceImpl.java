@@ -1,7 +1,7 @@
-package com.devops.eventmanagement.models.repository;
+package com.devops.eventmanagement.models.service;
 
 import com.devops.eventmanagement.models.entity.Cliente;
-import com.devops.eventmanagement.models.service.IClienteService;
+import com.devops.eventmanagement.models.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
