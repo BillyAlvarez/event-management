@@ -8,31 +8,36 @@
 <div class="container">
     <h1 th:text="${titulo}"></h1>
 
-    <table class="table">
-        <thead class="table-dark">
-        <tr>
-            <th scope="col">Id</th>
-            <th scope="col">Nombres</th>
-            <th scope="col">Apellidos</th>
-            <th scope="col">Telefono</th>
-            <th scope="col">Email</th>
-            <th scope="col">Ciudad</th>
+    <div class="container">
 
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="cl:${clientes}">
-            <th scope="row" th:text="${cl.id}"></th>
-            <th scope="row" th:text="${cl.nombres}"></th>
-            <th scope="row" th:text="${cl.apellidos}"></th>
-            <th scope="row" th:text="${cl.telefono}"></th>
-            <th scope="row" th:text="${cl.email}"></th>
-            <th scope="row" th:text="${cl.ciudad.ciudad}"></th>
-        </tr>
+        <a class="btn btn-primary btn-sm" th:href="@{/views/clientes/create}" th:text="'Nuevo Cliente'"
+           title="Crear Nuevo Registro"></a>
 
-        </tbody>
-    </table>
+        <table class="table">
+            <thead class="table-dark">
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Nombres</th>
+                <th scope="col">Apellidos</th>
+                <th scope="col">Telefono</th>
+                <th scope="col">Email</th>
+                <th scope="col">Ciudad</th>
 
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="cl:${clientes}">
+                <th scope="row" th:text="${cl.id}"></th>
+                <th scope="row" th:text="${cl.nombres}"></th>
+                <th scope="row" th:text="${cl.apellidos}"></th>
+                <th scope="row" th:text="${cl.telefono}"></th>
+                <th scope="row" th:text="${cl.email}"></th>
+                <th scope="row" th:text="${cl.ciudad.ciudad}"></th>
+            </tr>
+
+            </tbody>
+        </table>
+    </div>
 </div>
 
 <footer th:replace="plantilla/template :: footer"></footer>
