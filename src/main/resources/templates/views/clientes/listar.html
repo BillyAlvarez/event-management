@@ -42,7 +42,8 @@
                 </th>
                 <th>
                     <a class="btn btn-danger btn-sm" th:href="@{/views/clientes/delete/} + ${cl.id}" th:text="'Eliminar'"
-                       title="Eliminar Nuevo Registro"></a>
+                       title="Eliminar Nuevo Registro" onclick="return confirm('Está seguro de eliminar este registro?')"></a>
+
                 </th>
 
             </tr>
