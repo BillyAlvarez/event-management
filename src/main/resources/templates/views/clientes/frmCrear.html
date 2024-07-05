@@ -9,47 +9,56 @@
     <div class="card bg-light">
         <div class="card-header bg-dark text-light" th:text="${titulo}"></div>
         <div class="card-body">
-            <form th:action="@{/views/clientes/save}" th:object="${cliente}" method="post">
+            <form method="post" th:action="@{/views/clientes/save}" th:object="${cliente}">
                 <div class="for-group row">
-                    <label for="nombres" class="col-md-2">Nombres</label>
-                    <input type="text" th:field="*{nombres}" class="form-control-sm col-md-6" id="nombres"
-                           placeholder="Nombres del Cliente">
-                    <small></small>
+
+                    <input th:field="*{id}" type="hidden"/>
+                    <label class="col-md-2" for="nombres">Nombres</label>
+                    <input class="form-control-sm col-md-6" id="nombres" placeholder="Nombres del Cliente"
+                           th:field="*{nombres}"
+                           type="text">
+                    <small class="form-text text-danger" th:errors="*{nombres}"
+                           th:if="${#fields.hasErrors('nombres')}"></small>
                 </div>
 
                 <div class="for-group row">
-                    <label for="apellidos" class="col-md-2">Apellidos</label>
-                    <input type="text" th:field="*{apellidos}" class="form-control-sm col-md-6" id="apellidos"
-                           placeholder="Apellidos del Cliente">
-                    <small></small>
+                    <label class="col-md-2" for="apellidos">Apellidos</label>
+                    <input class="form-control-sm col-md-6" id="apellidos" placeholder="Apellidos del Cliente"
+                           th:field="*{apellidos}"
+                           type="text">
+                    <small class="form-text text-danger" th:errors="*{apellidos}"
+                           th:if="${#fields.hasErrors('apellidos')}"></small>
                 </div>
 
                 <div class="for-group row">
-                    <label for="telefono" class="col-md-2">Telefono</label>
-                    <input type="text" th:field="*{telefono}" class="form-control-sm col-md-6" id="telefono"
-                           placeholder="Telefono del Cliente">
-                    <small></small>
+                    <label class="col-md-2" for="telefono">Telefono</label>
+                    <input class="form-control-sm col-md-6" id="telefono" inputmode="numeric"
+                           pattern="\d{1,9}" placeholder="Telefono del Cliente" th:field="*{telefono}" type="text">
+
+                    <small class="form-text text-danger" th:errors="*{telefono}"
+                           th:if="${#fields.hasErrors('telefono')}"></small>
                 </div>
 
                 <div class="for-group row">
-                    <label for="email" class="col-md-2">Email</label>
-                    <input type="email" th:field="*{email}" class="form-control-sm col-md-6" id="email"
-                           placeholder="Email del Cliente">
-                    <small></small>
+                    <label class="col-md-2" for="email">Email</label>
+                    <input class="form-control-sm col-md-6" id="email" placeholder="Email del Cliente"
+                           th:field="*{email}"
+                           type="email">
+                    <small class="form-text text-danger" th:errors="*{email}"
+                           th:if="${#fields.hasErrors('email')}"></small>
                 </div>
 
                 <div class="for-group row">
-                    <label for="ciudad" class="col-md-2">Ciudad</label>
-                    <select th:field="*{ciudad}" class="form-control-sm col-md-6" id="ciudad">
+                    <label class="col-md-2" for="ciudad">Ciudad</label>
+                    <select class="form-control-sm col-md-6" id="ciudad" th:field="*{ciudad}">
                         <option th:each="ciudad:${ciudades}"
-                                th:value="${ciudad.id}"
                                 th:text="${ciudad.ciudad}"
-                        />
+                                th:value="${ciudad.id}"/>
                     </select>
                 </div>
 
                 <div class="card-footer bg-dark">
-                    <input type="submit" class="btn btn-primary btn-sm" value="Guardar">
+                    <input class="btn btn-primary btn-sm" type="submit" value="Guardar">
                 </div>
             </form>
         </div>
