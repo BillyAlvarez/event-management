@@ -1,6 +1,10 @@
 package com.devops.eventmanagement.models.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.ToString;
 
@@ -19,9 +23,16 @@ public class Cliente implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotEmpty
     private String nombres;
+    @NotEmpty
     private String apellidos;
+    @NotEmpty
+    @Size(min = 9, max = 9)
+    @Pattern(regexp = "[0-9]{9}")
     private String telefono;
+    @NotEmpty
+    @Email
     private String email;
 
     @ManyToOne

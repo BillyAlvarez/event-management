@@ -14,30 +14,38 @@
 
                     <input th:field="*{id}" type="hidden"/>
                     <label class="col-md-2" for="nombres">Nombres</label>
-                    <input class="form-control-sm col-md-6" id="nombres" placeholder="Nombres del Cliente" th:field="*{nombres}"
+                    <input class="form-control-sm col-md-6" id="nombres" placeholder="Nombres del Cliente"
+                           th:field="*{nombres}"
                            type="text">
-                    <small></small>
+                    <small class="form-text text-danger" th:errors="*{nombres}"
+                           th:if="${#fields.hasErrors('nombres')}"></small>
                 </div>
 
                 <div class="for-group row">
                     <label class="col-md-2" for="apellidos">Apellidos</label>
-                    <input class="form-control-sm col-md-6" id="apellidos" placeholder="Apellidos del Cliente" th:field="*{apellidos}"
+                    <input class="form-control-sm col-md-6" id="apellidos" placeholder="Apellidos del Cliente"
+                           th:field="*{apellidos}"
                            type="text">
-                    <small></small>
+                    <small class="form-text text-danger" th:errors="*{apellidos}"
+                           th:if="${#fields.hasErrors('apellidos')}"></small>
                 </div>
 
                 <div class="for-group row">
                     <label class="col-md-2" for="telefono">Telefono</label>
-                    <input class="form-control-sm col-md-6" id="telefono" placeholder="Telefono del Cliente" th:field="*{telefono}"
-                           type="text">
-                    <small></small>
+                    <input class="form-control-sm col-md-6" id="telefono" inputmode="numeric"
+                           pattern="\d{1,9}" placeholder="Telefono del Cliente" th:field="*{telefono}" type="text">
+
+                    <small class="form-text text-danger" th:errors="*{telefono}"
+                           th:if="${#fields.hasErrors('telefono')}"></small>
                 </div>
 
                 <div class="for-group row">
                     <label class="col-md-2" for="email">Email</label>
-                    <input class="form-control-sm col-md-6" id="email" placeholder="Email del Cliente" th:field="*{email}"
+                    <input class="form-control-sm col-md-6" id="email" placeholder="Email del Cliente"
+                           th:field="*{email}"
                            type="email">
-                    <small></small>
+                    <small class="form-text text-danger" th:errors="*{email}"
+                           th:if="${#fields.hasErrors('email')}"></small>
                 </div>
 
                 <div class="for-group row">
