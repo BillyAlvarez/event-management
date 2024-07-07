@@ -6,12 +6,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
-import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
+
 import javax.sql.DataSource;
 
 @Configuration
@@ -25,23 +22,39 @@ public class WebSecurityConfig {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
-    public void configurerSecurityGlobal(AuthenticationManagerBuilder builder) throws Exception {
-        builder.jdbcAuthentication()
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth.jdbcAuthentication()
                 .dataSource(dataSource)
                 .passwordEncoder(bCryptPasswordEncoder)
                 .usersByUsernameQuery("SELECT username, password, enabled FROM users WHERE username = ?")
                 .authoritiesByUsernameQuery("SELECT u.username, r.rol FROM roles r INNER JOIN users u ON r.user_id=u.id WHERE u.username = ?");
     }
 
+
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .authorizeRequests(authorizeRequests ->
-                        authorizeRequests.anyRequest().authenticated()
+                .authorizeHttpRequests(authorizeRequests -> authorizeRequests
+                        .requestMatchers("/index").permitAll()
+                        .requestMatchers("/home").permitAll()
+                        .requestMatchers("/").permitAll()
+                        .requestMatchers("/css/**").permitAll()
+                        .requestMatchers("/js/**").permitAll()
+                        .requestMatchers("/images/**").permitAll()
+                        .requestMatchers("/views/clientes/").hasAnyRole("USER")
+                        .requestMatchers("/views/clientes/create").hasAnyRole("ADMIN")
+                        .requestMatchers("/views/clientes/save").hasAnyRole("ADMIN")
+                        .requestMatchers("/views/clientes/edit/**").hasAnyRole("ADMIN")
+                        .requestMatchers("/views/clientes/delete/**").hasAnyRole("ADMIN")
+                        .anyRequest().authenticated()
                 )
-                .formLogin(formLogin ->
-                        formLogin.permitAll()
-                );
+                .formLogin(formLogin -> formLogin
+                        .loginPage("/login")
+                        .permitAll()
+                )
+                .logout(logout -> logout.permitAll());
+
         return http.build();
     }
 
