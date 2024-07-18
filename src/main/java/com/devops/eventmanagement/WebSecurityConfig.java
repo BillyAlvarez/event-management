@@ -1,5 +1,6 @@
 package com.devops.eventmanagement;
 
+import com.devops.eventmanagement.util.LoginSuccesMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,6 +23,9 @@ public class WebSecurityConfig {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
+    private LoginSuccesMessage loginSuccesMessage;
+
+    @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication()
                 .dataSource(dataSource)
@@ -29,7 +33,6 @@ public class WebSecurityConfig {
                 .usersByUsernameQuery("SELECT username, password, enabled FROM users WHERE username = ?")
                 .authoritiesByUsernameQuery("SELECT u.username, r.rol FROM roles r INNER JOIN users u ON r.user_id=u.id WHERE u.username = ?");
     }
-
 
 
     @Bean
@@ -50,7 +53,7 @@ public class WebSecurityConfig {
                         .anyRequest().authenticated()
                 )
                 .formLogin(formLogin -> formLogin
-                        .loginPage("/login")
+                        .loginPage("/login").successHandler(loginSuccesMessage)
                         .permitAll()
                 )
                 .logout(logout -> logout.permitAll());
