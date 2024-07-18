@@ -12,19 +12,19 @@ import java.security.Principal;
 public class LoginController {
 
     @GetMapping("/login")
-    public String login(@RequestParam(value = "error",required = false) String error,@RequestParam(value="logout",required = false) String logout, Model model , Principal principal, RedirectAttributes redirectAttributes){
+    public String login(@RequestParam(value = "error", required = false) String error, @RequestParam(value = "logout", required = false) String logout, Model model, Principal principal, RedirectAttributes redirectAttributes) {
 
-        if(error != null){
-            model.addAttribute("error","Invalid username or password");
+        if (error != null) {
+            model.addAttribute("error", "Invalid username or password");
         }
 
-        if(principal != null){
-           redirectAttributes.addFlashAttribute("warning","You are logged in");
-           return "redirect:/index";
+        if (principal != null) {
+            redirectAttributes.addFlashAttribute("warning", "You are logged in");
+            return "redirect:/index";
         }
 
-        if(logout != null){
-            model.addAttribute("success","You have logged out");
+        if (logout != null) {
+            model.addAttribute("success", "You have logged out");
         }
 
         return "login";
