@@ -6,6 +6,7 @@ import com.devops.eventmanagement.models.service.ICiudadService;
 import com.devops.eventmanagement.models.service.IClienteService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,7 +25,7 @@ public class ClienteController {
     @Autowired
     private ICiudadService ciudadService;
 
-
+    @Secured("ROLE_USER")
     @GetMapping("/")
     public String listarClientes(Model model) {
         List<Cliente> listadoClientes = clienteService.listarTodos();
@@ -34,7 +35,7 @@ public class ClienteController {
 
         return "/views/clientes/listar";
     }
-
+    @Secured("ROLE_ADMIN")
     @GetMapping("/create")
     public String crear(Model model) {
 
@@ -47,7 +48,7 @@ public class ClienteController {
         return "/views/clientes/frmCrear";
 
     }
-
+    @Secured({"ROLE_USER, ROLE_ADMIN"})
     @PostMapping("/save")
     public String guardar(@Valid @ModelAttribute Cliente cliente, BindingResult result, Model model, RedirectAttributes redirectAttributes) {
         List<Ciudad> listCiudades = ciudadService.listaCiudades();
@@ -65,7 +66,7 @@ public class ClienteController {
         return "redirect:/views/clientes/";
 
     }
-
+    @Secured({"ROLE_USER, ROLE_ADMIN"})
     @GetMapping("/edit/{id}")
     public String editar(@PathVariable("id") Long idCliente, Model model, RedirectAttributes redirectAttributes) {
         Cliente cliente = null;
@@ -90,7 +91,7 @@ public class ClienteController {
 
     }
 
-
+    @Secured( "ROLE_ADMIN")
     @GetMapping("/delete/{id}")
     public String eliminar(@PathVariable("id") Long idCliente, RedirectAttributes redirectAttributes) {
 

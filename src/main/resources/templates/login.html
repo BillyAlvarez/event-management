@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head th:replace="plantilla/template :: head">
+
+</head>
+<body>
+<header th:replace="plantilla/template :: header"></header>
+<div class="container">
+    <div class="container theme-showcase" role="main">
+        <hr class="featurette-divider">
+        <img class="center" height="136" th:src="@{/images/login.png}" width="136">
+        <form class="form-signin" method="post" th:action="@{/login}">
+            <h3 class="form-signin-heading text-center">Iniciar Session</h3>
+            <label class="sr-only" for="username">Usuario</label>
+            <input autofocus class="form-control" id="username" name="username" placeholder="Usuario" required
+                   type="text">
+            <label class="sr-only" for="password">Contraseña</label>
+            <input class="form-control" id="password" name="password" placeholder="Password" required type="password">
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
+        </form>
+
+    </div>
+</div>
+<footer th:replace="plantilla/template :: footer"></footer>
+</body>
+</html>
